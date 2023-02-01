@@ -8,8 +8,8 @@ export class TuitsController {
     }
 
     @Get(':id')
-    getTuit(@Param() params){
-        return `Your tuit id is ${params.id}`;
+    getTuit(@Param('id') id: string): string{
+        return `Your tuit id is ${id}`;
     }
 }
  
