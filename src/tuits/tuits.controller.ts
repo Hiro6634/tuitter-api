@@ -1,10 +1,12 @@
-import { Controller, Get, Param, Post, Patch, Delete, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Param, Post, Patch, Delete, Body, HttpCode, HttpStatus, Query } from '@nestjs/common';
 
 @Controller('tuits')
 export class TuitsController {
     @Get()
-    getTuits(){
-        return 'Hello World from Tuitter';
+    getTuits(@Query() filterQuery): string{
+        const {searchTerm, orderBy} = filterQuery;
+
+        return `All ${searchTerm} tuits order by ${orderBy}`;
     }
 
     @Get(':id')
