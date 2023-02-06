@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Param, Post, Patch, Delete, Body, HttpCode, HttpStatus } from '@nestjs/common';
 
 @Controller('tuits')
 export class TuitsController {
@@ -14,8 +14,18 @@ export class TuitsController {
 
     @Post()
     @HttpCode(HttpStatus.NO_CONTENT)
-    createTuit(@Body('message') message: string){
+    createTuit(@Body('message') message: string): string{
       return `Yout tuit was: ${message}`;
+    }  
+
+    @Patch(':id')
+    updateTuit(@Param('id') id: string): string{
+      return `The tuit ${id} was updated`;
+    }  
+
+    @Delete(':id')
+    deleteTuit(@Param('id') id: string, @Body() tuit): string{
+        return `The tuit ${id} was deleted`;
     }  
 }
  
