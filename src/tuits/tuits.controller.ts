@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 
 @Controller('tuits')
 export class TuitsController {
@@ -11,5 +11,10 @@ export class TuitsController {
     getTuit(@Param('id') id: string): string{
         return `Your tuit id is ${id}`;
     }
+
+    @Post()
+    createTuit(@Body('message') message: string){
+      return `Yout tuit was: ${message}`;
+    }  
 }
  
