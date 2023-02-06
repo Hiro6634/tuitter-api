@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import {Tuit} from './tuit.entity';
 
 @Injectable()
@@ -16,7 +16,13 @@ export class TuitsService {
     }
 
     getTuit(id: string): Tuit{
-        return this.tuits.find((item)=> item.id === id);
+        const tuit =  this.tuits.find((item)=> item.id === id);
+
+        if( !tuit){
+            throw new NotFoundException("Resource not found")
+        }
+
+        return tuit;
     }
 
     createTuit(message: string){
