@@ -15,7 +15,7 @@ export class TuitsController {
     }
 
     @Get(':id')
-    getTuit(@Param('id') id: string): Tuit{
+    getTuit(@Param('id') id: number): Tuit{
         return this.tuitService.getTuit(id);
     }
 
@@ -26,12 +26,12 @@ export class TuitsController {
     }  
 
     @Patch(':id')
-    updateTuit(@Param('id') id: string, @Body() tuit: UpdateTuitDto){
+    updateTuit(@Param('id') id: number, @Body() tuit: UpdateTuitDto){
       return this.tuitService.updateTuit(id, tuit);
     }  
 
     @Delete(':id')
-    deleteTuit(@Param('id') id: string){
+    deleteTuit(@Param('id') id: number){
         return this.tuitService.removeTuit(id);
     }  
 }

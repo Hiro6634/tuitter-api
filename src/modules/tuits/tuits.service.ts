@@ -7,7 +7,7 @@ import {Tuit} from './tuit.entity';
 export class TuitsService {
     private tuits: Tuit[] = [
         {
-            id:'1',
+            id:1,
             message: 'Hello world from Nest.js',
         }
     ];
@@ -17,7 +17,7 @@ export class TuitsService {
         return this.tuits;
     }
 
-    getTuit(id: string): Tuit{
+    getTuit(id: number): Tuit{
         const tuit =  this.tuits.find((item)=> item.id === id);
 
         if( !tuit){
@@ -29,17 +29,17 @@ export class TuitsService {
 
     createTuit({message}: CreateTuitDto){
         this.tuits.push({
-            id: (Math.floor(Math.random() * 2000) + 1).toString(),
+            id: (Math.floor(Math.random() * 2000) + 1),
             message,
         });
     }
 
-    updateTuit(id: string, {message}: UpdateTuitDto){
+    updateTuit(id: number, {message}: UpdateTuitDto){
         const tuit: Tuit = this.getTuit(id);
         tuit.message = message;
     }
 
-    removeTuit(id: string){
+    removeTuit(id: number){
         const index = this.tuits.findIndex((tuit) => tuit.id === id);
         if(index >= 0){
             this.tuits.splice(index,1);
