@@ -8,19 +8,19 @@ export class TuitsController {
     constructor(private readonly tuitService: TuitsService){ }
 
     @Get()
-    getTuits(@Query() filterQuery): Tuit[]{
+    getTuits(@Query() filterQuery): Promise<Tuit[]>{
         const {searchTerm, orderBy} = filterQuery;
 
         return this.tuitService.getTuits();
     }
 
     @Get(':id')
-    getTuit(@Param('id') id: number): Tuit{
+    getTuit(@Param('id') id: number): Promise<Tuit>{
         return this.tuitService.getTuit(id);
     }
 
     @Post()
-    createTuit(@Body() message: CreateTuitDto): void{
+    createTuit(@Body() message: CreateTuitDto): Promise<Tuit>{
       console.log(message instanceof CreateTuitDto);
       return this.tuitService.createTuit(message);
     }  
