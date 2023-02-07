@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
-import { CreateTuitDto, UpdateTuitDto } from './dto';
+import { CreateTuitDto, PaginationQueryDto, UpdateTuitDto } from './dto';
 
 import {Tuit} from './tuit.entity';
 
@@ -13,8 +13,12 @@ export class TuitsService {
 
     }
 
-    async getTuits():Promise<Tuit[]>{
-        return await this.tuitRepository.find({relations: ['user']});
+    async getTuits({limit, offset}: PaginationQueryDto):Promise<Tuit[]>{
+        return await this.tuitRepository.find({
+            relations: ['user'],
+            skip: offset,
+            take: limit
+        });
     }
 
     async getTuit(id: number): Promise<Tuit>{
