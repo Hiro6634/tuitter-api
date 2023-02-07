@@ -14,13 +14,13 @@ export class TuitsService {
     }
 
     async getTuits():Promise<Tuit[]>{
-        return await this.tuitRepository.find();
+        return await this.tuitRepository.find({relations: ['user']});
     }
 
     async getTuit(id: number): Promise<Tuit>{
         const tuit: Tuit =  await this.tuitRepository.findOne({where: {
             id: id
-        }});
+        }, relations: ['user']});
 
         if( !tuit){
             throw new NotFoundException("Resource not found")
